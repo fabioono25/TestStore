@@ -23,6 +23,9 @@ namespace TestStore.Catalogo.Domain
 
         public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem)
         {
+            //fail fast validation - uma das estrategias
+            //if (string.IsNullOrEmpty(nome)) throw new Exception("um tipo de validacao");
+
             Nome = nome;
             Descricao = descricao;
             Ativo = ativo;
@@ -30,6 +33,8 @@ namespace TestStore.Catalogo.Domain
             CategoriaId = categoriaId;
             DataCadastro = dataCadastro;
             Imagem = imagem;
+
+            Validar();
         }
 
         //ad-hoc setters: trocar estado da entidade
@@ -38,6 +43,7 @@ namespace TestStore.Catalogo.Domain
 
         public void Desativar() => Ativo = false;
 
+        //categoria ja esta valida neste momento
         public void AlterarCategoria(Categoria categoria) { 
             Categoria = categoria;
             CategoriaId = categoria.Id;
@@ -45,12 +51,15 @@ namespace TestStore.Catalogo.Domain
 
         public void AlterarDescricao(string descricao)
         {
+            Validacoes.ValidarSeVazio(descricao, "o campo descricao do produto nao pode estar vazio");
             Descricao = descricao;
         }
 
         public void DebitarEstoque(int quantidade)
         {
             if (quantidade < 0) quantidade *= -1;
+
+            if (!PossuiEstoque(quantidade)) throw new DomainException("Estoque insuficiente");
 
             QuantidadeEstoque -= quantidade;
         }
@@ -66,10 +75,14 @@ namespace TestStore.Catalogo.Domain
         }
 
         //a entidade possui a capacidade de se auto-validar
-        //consistencia da entidade
+        //consistencia da entidade. estrategia melhor por conta de ser possivel ser chamada externamente
         public void Validar()
         {
-
+            Validacoes.ValidarSeVazio(Nome, "O campo Nome do produto não pode estar vazio");
+            Validacoes.ValidarSeVazio(Descricao, "O campo Descricao do produto não pode estar vazio");
+            Validacoes.ValidarSeIgual(CategoriaId, Guid.Empty, "O campo CategoriaId do produto não pode estar vazio");
+            Validacoes.ValidarSeMenorQue(Valor, 1, "O campo Valor do produto não pode se menor igual a 0");
+            Validacoes.ValidarSeVazio(Imagem, "O campo Imagem do produto não pode estar vazio");
         }
     }
 }
