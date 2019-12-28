@@ -1,4 +1,5 @@
-﻿using TestStore.Core.DomainObjects;
+﻿using System.Collections.Generic;
+using TestStore.Core.DomainObjects;
 
 namespace TestStore.Catalogo.Domain
 {
@@ -7,8 +8,16 @@ namespace TestStore.Catalogo.Domain
     ///categoria e' uma entidade imutavel
     public class Categoria: Entity
     {
+        protected Categoria()
+        {
+
+        }
+
         public string Nome { get; private set; }
         public int Codigo { get; private set; }
+        
+        //por conta do EF
+        public ICollection<Produto> Produtos { get; set; }
 
         public Categoria(string nome, int codigo)
         {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TestStore.Core.DomainObjects;
+﻿using TestStore.Core.DomainObjects;
 
 namespace TestStore.Catalogo.Domain
 {
