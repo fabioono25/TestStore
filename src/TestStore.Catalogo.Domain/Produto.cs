@@ -7,6 +7,7 @@ namespace TestStore.Catalogo.Domain
     ///produto e' uma raiz de agregacao
     ///a entidade deveria ser ignorante ao meio de persistencia (DB)
     ///contudo precisamos de uma implementacao para antender ao modelo de ORM
+    ///objeto de valor: agrega valor a entidade
     public class Produto : Entity, IAggregateRoot
     {
         //necessario por conta do EF
@@ -19,9 +20,11 @@ namespace TestStore.Catalogo.Domain
         public DateTime DataCadastro { get; private set; }
         public string Imagem { get; private set; }
         public int QuantidadeEstoque { get; private set; } //poderia ser um modulo de estoque
+        public Dimensoes Dimensoes { get; set; }
+
         public Categoria Categoria { get; private set; }
 
-        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem)
+        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem, Dimensoes dimensoes)
         {
             //fail fast validation - uma das estrategias
             //if (string.IsNullOrEmpty(nome)) throw new Exception("um tipo de validacao");
@@ -33,6 +36,7 @@ namespace TestStore.Catalogo.Domain
             CategoriaId = categoriaId;
             DataCadastro = dataCadastro;
             Imagem = imagem;
+            Dimensoes = dimensoes;
 
             Validar();
         }
