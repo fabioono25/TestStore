@@ -14,6 +14,7 @@ namespace TestStore.Catalogo.Domain.Events
             _produtoRepository = produtoRepository;
         }
 
+        //um handle por evento
         public async Task Handle(ProdutoAbaixoEstoqueEvent message, CancellationToken cancellationToken)
         {
             var produto = await _produtoRepository.ObterPorId(message.AggregateId);
