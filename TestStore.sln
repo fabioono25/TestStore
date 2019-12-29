@@ -19,15 +19,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamentos", "Pagamentos", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vendas", "Vendas", "{FB646713-E397-4712-B909-C133E65681AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Catalogo.Domain", "src\TestStore.Catalogo.Domain\TestStore.Catalogo.Domain.csproj", "{ED182083-E5A6-4E8E-B9E8-55A5BFF5DBED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Catalogo.Domain", "src\TestStore.Catalogo.Domain\TestStore.Catalogo.Domain.csproj", "{ED182083-E5A6-4E8E-B9E8-55A5BFF5DBED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Core", "src\TestStore.Core\TestStore.Core.csproj", "{34C4AC54-AB5A-46FD-B4F5-7569DF95B055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Core", "src\TestStore.Core\TestStore.Core.csproj", "{34C4AC54-AB5A-46FD-B4F5-7569DF95B055}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A06BB7FB-2A8A-4043-8723-C90AFFB7736A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Catalogo.Domain.Tests", "tests\TestStore.Catalogo.Domain.Tests\TestStore.Catalogo.Domain.Tests.csproj", "{475C9D22-2DA0-4539-BF63-C661C8F20D62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Catalogo.Domain.Tests", "tests\TestStore.Catalogo.Domain.Tests\TestStore.Catalogo.Domain.Tests.csproj", "{475C9D22-2DA0-4539-BF63-C661C8F20D62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Catalogo.Data", "TestStore.Catalogo.Data\TestStore.Catalogo.Data.csproj", "{03095E16-0820-4053-80A6-B636C808AB44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Catalogo.Data", "TestStore.Catalogo.Data\TestStore.Catalogo.Data.csproj", "{03095E16-0820-4053-80A6-B636C808AB44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Catalogo.Application", "src\TestStore.Catalogo.Application\TestStore.Catalogo.Application.csproj", "{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{03095E16-0820-4053-80A6-B636C808AB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03095E16-0820-4053-80A6-B636C808AB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03095E16-0820-4053-80A6-B636C808AB44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,9 +70,10 @@ Global
 		{FB646713-E397-4712-B909-C133E65681AF} = {213EE8DF-13DA-47D8-AA30-F16A9F4A4C2C}
 		{ED182083-E5A6-4E8E-B9E8-55A5BFF5DBED} = {75A59E06-B8EB-4672-BABF-C7B5A80A0A6F}
 		{34C4AC54-AB5A-46FD-B4F5-7569DF95B055} = {0BDCFF0B-8353-4754-A663-6A8BD3FFFD1E}
-		{A06BB7FB-2A8A-4043-8723-C90AFFB7736A} = {213EE8DF-13DA-47D8-AA30-F16A9F4A4C2C}
+		{A06BB7FB-2A8A-4043-8723-C90AFFB7736A} = {75A59E06-B8EB-4672-BABF-C7B5A80A0A6F}
 		{475C9D22-2DA0-4539-BF63-C661C8F20D62} = {A06BB7FB-2A8A-4043-8723-C90AFFB7736A}
 		{03095E16-0820-4053-80A6-B636C808AB44} = {75A59E06-B8EB-4672-BABF-C7B5A80A0A6F}
+		{44B5CCA2-76E2-4D5F-9CBC-8605D07CCCC0} = {75A59E06-B8EB-4672-BABF-C7B5A80A0A6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A14B02EA-DC55-4A36-AD75-F9E7EF6D6C32}
