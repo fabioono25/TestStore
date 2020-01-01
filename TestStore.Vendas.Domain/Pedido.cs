@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestStore.Core.DomainObjects;
 using System.Linq;
+using TestStore.Core.DomainObjects;
 
 namespace TestStore.Vendas.Domain
 {

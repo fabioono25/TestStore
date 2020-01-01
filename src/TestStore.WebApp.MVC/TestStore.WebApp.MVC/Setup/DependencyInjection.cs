@@ -6,6 +6,7 @@ using TestStore.Catalogo.Data.Repository;
 using TestStore.Catalogo.Domain;
 using TestStore.Catalogo.Domain.Events;
 using TestStore.Core.Bus;
+using TestStore.Vendas.Application.Commands;
 
 namespace TestStore.WebApp.MVC.Setup
 {
@@ -27,6 +28,9 @@ namespace TestStore.WebApp.MVC.Setup
             services.AddScoped<CatalogoContext>();
 
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventHandler>();
+
+            // Vendas
+            services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
         }
     }
 }
