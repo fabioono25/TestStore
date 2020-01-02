@@ -7,6 +7,9 @@ using TestStore.Catalogo.Domain;
 using TestStore.Catalogo.Domain.Events;
 using TestStore.Core.Bus;
 using TestStore.Vendas.Application.Commands;
+using TestStore.Vendas.Domain;
+using TestStore.Vendas.Infrastructure;
+using TestStore.Vendas.Infrastructure.Repository;
 
 namespace TestStore.WebApp.MVC.Setup
 {
@@ -19,7 +22,7 @@ namespace TestStore.WebApp.MVC.Setup
         public static void RegisterServices(this IServiceCollection services)
         {
             // Domain Bus (Mediator)
-            services.AddScoped<IMediatrHandler, MediatrHandler>();
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
 
             // Catalogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -31,6 +34,8 @@ namespace TestStore.WebApp.MVC.Setup
 
             // Vendas
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<VendasContext>();
         }
     }
 }

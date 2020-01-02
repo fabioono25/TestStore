@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using TestStore.Core.DomainObjects;
 
@@ -12,7 +13,11 @@ namespace TestStore.Vendas.Domain
         public Guid ClienteId { get; private set; }
         public Guid? VoucherId { get; private set; }
         public bool VoucherUtilizado { get; private set; }
+        
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Desconto { get; private set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal ValorTotal { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public PedidoStatus PedidoStatus { get; private set; }

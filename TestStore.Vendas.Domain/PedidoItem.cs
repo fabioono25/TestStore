@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using TestStore.Core.DomainObjects;
 
 namespace TestStore.Vendas.Domain
@@ -10,6 +11,8 @@ namespace TestStore.Vendas.Domain
         public Guid ProdutoId { get; private set; }
         public string ProdutoNome { get; private set; }
         public int Quantidade { get; private set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal ValorUnitario { get; private set; }
 
         //EF 

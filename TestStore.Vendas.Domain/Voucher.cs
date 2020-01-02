@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using TestStore.Core.DomainObjects;
 
 namespace TestStore.Vendas.Domain
@@ -7,7 +8,10 @@ namespace TestStore.Vendas.Domain
     public class Voucher : Entity
     {
         public string Codigo { get; private set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal? Percentual { get; private set; }
+        [Column(TypeName = "decimal(18,4)")]
         public decimal? ValorDesconto { get; private set; }
         public int Quantidade { get; private set; }
         public TipoDescontoVoucher TipoDescontoVoucher { get; private set; }
@@ -19,5 +23,8 @@ namespace TestStore.Vendas.Domain
 
         //EF: um voucher aplicado para N pedidos
         public ICollection<Pedido> Pedidos { get; set; }
+
+        protected Voucher() { }
+
     }
 }
