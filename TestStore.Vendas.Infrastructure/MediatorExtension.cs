@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestStore.Core.Bus;
+using TestStore.Core.Communication;
+using TestStore.Core.Communication.Mediator;
 using TestStore.Core.DomainObjects;
 
 namespace TestStore.Vendas.Infrastructure

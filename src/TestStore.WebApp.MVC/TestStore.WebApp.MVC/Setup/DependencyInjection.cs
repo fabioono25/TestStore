@@ -5,7 +5,8 @@ using TestStore.Catalogo.Data;
 using TestStore.Catalogo.Data.Repository;
 using TestStore.Catalogo.Domain;
 using TestStore.Catalogo.Domain.Events;
-using TestStore.Core.Bus;
+using TestStore.Core.Communication.Mediator;
+using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Vendas.Application.Commands;
 using TestStore.Vendas.Domain;
 using TestStore.Vendas.Infrastructure;
@@ -21,8 +22,11 @@ namespace TestStore.WebApp.MVC.Setup
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            // Domain Bus (Mediator)
+            // Mediator
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+
+            // Notifications
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             // Catalogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

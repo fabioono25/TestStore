@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using TestStore.Core.Messages;
+using TestStore.Core.Messages.CommonMessages.Notifications;
 
-namespace TestStore.Core.Bus
+namespace TestStore.Core.Communication.Mediator
 {
     /// Nao e' bem um BUS (BUS em memoria)
     public interface IMediatorHandler
@@ -11,5 +12,8 @@ namespace TestStore.Core.Bus
 
         //envio de comando
         Task<bool> EnviarComando<T>(T comando) where T : Command;
+
+        //tratar separadamente como uma notificacao
+        Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification;
     }
 }

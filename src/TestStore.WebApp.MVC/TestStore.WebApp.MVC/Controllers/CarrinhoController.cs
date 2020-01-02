@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TestStore.Catalogo.Application.Services;
-using TestStore.Core.Bus;
+using TestStore.Core.Communication;
+using TestStore.Core.Communication.Mediator;
+using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Vendas.Application.Commands;
 
 namespace TestStore.WebApp.MVC.Controllers
@@ -12,7 +15,9 @@ namespace TestStore.WebApp.MVC.Controllers
         private readonly IProdutoAppService _produtoAppService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public CarrinhoController(IProdutoAppService produtoAppService, IMediatorHandler mediatorHandler)
+        public CarrinhoController(INotificationHandler<DomainNotification> notifications,
+                                  IProdutoAppService produtoAppService,
+                                  IMediatorHandler mediatorHandler) : base(notifications, mediatorHandler)
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
@@ -39,13 +44,12 @@ namespace TestStore.WebApp.MVC.Controllers
             var command = new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
             await _mediatorHandler.EnviarComando(command);
 
-            //se tudo deu certo
-            //if (OperacaoValida())
-            //{
-            //    return RedirectToAction("Index");
-            //}
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index");
+            }
 
-            TempData["Erros"] = "Produto Indisponivel";
+            TempData["Erros"] = ObterMensagensErro();
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
     }

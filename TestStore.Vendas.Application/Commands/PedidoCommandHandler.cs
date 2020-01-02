@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages;
+using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Vendas.Domain;
 
 namespace TestStore.Vendas.Application.Commands
@@ -10,6 +12,13 @@ namespace TestStore.Vendas.Application.Commands
     public class PedidoCommandHandler : IRequestHandler<AdicionarItemPedidoCommand, bool>
     {
         private IPedidoRepository _pedidoRepository;
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public PedidoCommandHandler(IPedidoRepository pedidoRepository, IMediatorHandler mediatorHandler)
+        {
+            _pedidoRepository = pedidoRepository;
+            _mediatorHandler = mediatorHandler;
+        }
 
         public async Task<bool> Handle(AdicionarItemPedidoCommand message, CancellationToken cancellationToken)
         {
@@ -52,7 +61,7 @@ namespace TestStore.Vendas.Application.Commands
 
             foreach (var error in message.ValidationResult.Errors)
             {
-                //lancar um evento de erro
+                _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
 
             return false;

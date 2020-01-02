@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using System.Threading.Tasks;
 using TestStore.Core.Messages;
+using TestStore.Core.Messages.CommonMessages.Notifications;
 
-namespace TestStore.Core.Bus
+namespace TestStore.Core.Communication.Mediator
 {
     /// <summary>
     /// implementacao do mediator / Wrapper
@@ -25,8 +26,13 @@ namespace TestStore.Core.Bus
 
         public async Task PublicarEvento<T>(T evento) where T : Event
         {
-            //apenas disparo de notificacao
             await _mediator.Publish(evento);
+        }
+
+        public async Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification
+        {
+            //apenas disparo de notificacao
+            await _mediator.Publish(notificacao);
         }
     }
 }
