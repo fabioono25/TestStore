@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestStore.Catalogo.Domain;
 using TestStore.Core.Data;
+using TestStore.Core.Messages;
 
 namespace TestStore.Catalogo.Data
 {
@@ -27,6 +28,8 @@ namespace TestStore.Catalogo.Data
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
+
+            modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
         }

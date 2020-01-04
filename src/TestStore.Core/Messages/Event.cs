@@ -7,6 +7,7 @@ namespace TestStore.Core.Messages
     /// INotification: interface de marcacao
     /// todo evento e' uma mensagem e uma notificacao
     /// </summary>
+    
     public abstract class Event: Message, INotification
     {
         public DateTime Timestamp { get; private set; }
