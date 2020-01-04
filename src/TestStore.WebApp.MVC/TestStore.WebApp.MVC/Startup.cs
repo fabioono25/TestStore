@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TestStore.Catalogo.Application.AutoMapper;
 using TestStore.Catalogo.Data;
+using TestStore.Pagamentos.Data;
 using TestStore.Vendas.Infrastructure;
 using TestStore.WebApp.MVC.Data;
 using TestStore.WebApp.MVC.Setup;
@@ -36,6 +37,10 @@ namespace TestStore.WebApp.MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<VendasContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<PagamentoContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 

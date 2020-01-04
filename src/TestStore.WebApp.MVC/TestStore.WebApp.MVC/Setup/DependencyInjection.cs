@@ -8,6 +8,11 @@ using TestStore.Catalogo.Domain.Events;
 using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Core.Messages.IntegrationEvents;
+using TestStore.Pagamentos.AntiCorruption;
+using TestStore.Pagamentos.Business;
+using TestStore.Pagamentos.Business.Events;
+using TestStore.Pagamentos.Data;
+using TestStore.Pagamentos.Data.Repository;
 using TestStore.Vendas.Application.Commands;
 using TestStore.Vendas.Application.Events;
 using TestStore.Vendas.Application.Queries;
@@ -53,6 +58,16 @@ namespace TestStore.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoItemAdicionadoEvent>, PedidoEventHandler>();
+
+            // Pagamento
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
+            services.AddScoped<IPagamentoCartaoCreditoFacade, PagamentoCartaoCreditoFacade>();
+            services.AddScoped<IPayPalGateway, PayPalGateway>();
+            services.AddScoped<IConfigurationManager, ConfigurationManager>();
+            services.AddScoped<PagamentoContext>();
+
+            services.AddScoped<INotificationHandler<PedidoEstoqueConfirmadoEvent>, PagamentoEventHandler>();
         }
     }
 }

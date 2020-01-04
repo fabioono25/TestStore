@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TestStore.Core.DomainObjects.Dto;
 
 namespace TestStore.Core.Messages.IntegrationEvents

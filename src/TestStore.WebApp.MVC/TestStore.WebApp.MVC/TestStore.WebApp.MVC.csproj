@@ -26,6 +26,8 @@
     <ProjectReference Include="..\..\TestStore.Catalogo.Application\TestStore.Catalogo.Application.csproj" />
     <ProjectReference Include="..\..\TestStore.Catalogo.Domain\TestStore.Catalogo.Domain.csproj" />
     <ProjectReference Include="..\..\TestStore.Core\TestStore.Core.csproj" />
+    <ProjectReference Include="..\..\TestStore.Pagamentos.AntiCorruption\TestStore.Pagamentos.AntiCorruption.csproj" />
+    <ProjectReference Include="..\..\TestStore.Pagamentos.Data\TestStore.Pagamentos.Data.csproj" />
   </ItemGroup>
 
 

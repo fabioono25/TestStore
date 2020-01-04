@@ -33,11 +33,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Catalogo.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.WebApp.MVC", "src\TestStore.WebApp.MVC\TestStore.WebApp.MVC\TestStore.WebApp.MVC.csproj", "{E9CB8F2F-25F0-4550-A27A-913E52F4A182}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Vendas.Domain", "TestStore.Vendas.Domain\TestStore.Vendas.Domain.csproj", "{E4C2D2B2-0902-45F7-B1DF-3BC3FF4F0266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Vendas.Domain", "TestStore.Vendas.Domain\TestStore.Vendas.Domain.csproj", "{E4C2D2B2-0902-45F7-B1DF-3BC3FF4F0266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Vendas.Application", "TestStore.Vendas.Application\TestStore.Vendas.Application.csproj", "{A4F8EBA5-59E7-4C91-96E4-85137F5538AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Vendas.Application", "TestStore.Vendas.Application\TestStore.Vendas.Application.csproj", "{A4F8EBA5-59E7-4C91-96E4-85137F5538AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Vendas.Infrastructure", "TestStore.Vendas.Infrastructure\TestStore.Vendas.Infrastructure.csproj", "{85C5CE28-1BE5-4EBD-8673-70D7F0080953}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStore.Vendas.Infrastructure", "TestStore.Vendas.Infrastructure\TestStore.Vendas.Infrastructure.csproj", "{85C5CE28-1BE5-4EBD-8673-70D7F0080953}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Pagamentos.AntiCorruption", "src\TestStore.Pagamentos.AntiCorruption\TestStore.Pagamentos.AntiCorruption.csproj", "{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Pagamentos.Business", "src\TestStore.Pagamentos.Business\TestStore.Pagamentos.Business.csproj", "{D5314459-2878-4EA0-8F4D-055C9C5F4F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStore.Pagamentos.Data", "src\TestStore.Pagamentos.Data\TestStore.Pagamentos.Data.csproj", "{5355AC38-EE46-4FCA-AF8F-0202B1935436}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +87,18 @@ Global
 		{85C5CE28-1BE5-4EBD-8673-70D7F0080953}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85C5CE28-1BE5-4EBD-8673-70D7F0080953}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85C5CE28-1BE5-4EBD-8673-70D7F0080953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5314459-2878-4EA0-8F4D-055C9C5F4F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5314459-2878-4EA0-8F4D-055C9C5F4F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5314459-2878-4EA0-8F4D-055C9C5F4F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5314459-2878-4EA0-8F4D-055C9C5F4F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5355AC38-EE46-4FCA-AF8F-0202B1935436}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5355AC38-EE46-4FCA-AF8F-0202B1935436}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5355AC38-EE46-4FCA-AF8F-0202B1935436}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5355AC38-EE46-4FCA-AF8F-0202B1935436}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +120,9 @@ Global
 		{E4C2D2B2-0902-45F7-B1DF-3BC3FF4F0266} = {FB646713-E397-4712-B909-C133E65681AF}
 		{A4F8EBA5-59E7-4C91-96E4-85137F5538AD} = {FB646713-E397-4712-B909-C133E65681AF}
 		{85C5CE28-1BE5-4EBD-8673-70D7F0080953} = {FB646713-E397-4712-B909-C133E65681AF}
+		{DAE90B53-9EE2-464D-9ED9-70DFC8E0CA3D} = {745C7C20-6192-46E9-82EC-12B46FCCD832}
+		{D5314459-2878-4EA0-8F4D-055C9C5F4F75} = {745C7C20-6192-46E9-82EC-12B46FCCD832}
+		{5355AC38-EE46-4FCA-AF8F-0202B1935436} = {745C7C20-6192-46E9-82EC-12B46FCCD832}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A14B02EA-DC55-4A36-AD75-F9E7EF6D6C32}
