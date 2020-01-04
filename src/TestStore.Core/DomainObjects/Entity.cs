@@ -14,7 +14,6 @@ namespace TestStore.Core.DomainObjects
         private List<Event> _notificacoes;
         public IReadOnlyCollection<Event> Notificacoes => _notificacoes?.AsReadOnly();
 
-
         protected Entity()
         {
             Id = Guid.NewGuid();

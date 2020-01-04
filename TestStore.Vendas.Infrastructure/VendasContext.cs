@@ -14,8 +14,7 @@ namespace TestStore.Vendas.Infrastructure
     public class VendasContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
-
-
+        
         public VendasContext(DbContextOptions<VendasContext> options, IMediatorHandler mediatorHandler)
             : base(options)
         {
