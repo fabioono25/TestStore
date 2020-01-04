@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TestStore.Catalogo.Domain.Events;
-using TestStore.Core.Communication;
 using TestStore.Core.Communication.Mediator;
 
 namespace TestStore.Catalogo.Domain

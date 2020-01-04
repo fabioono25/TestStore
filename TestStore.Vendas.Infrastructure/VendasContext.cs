@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TestStore.Core.Communication;
 using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Data;
 using TestStore.Core.Messages;

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TestStore.Vendas.Application.Queries.ViewModelsDtos
 {

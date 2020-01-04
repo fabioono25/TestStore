@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TestStore.Vendas.Application.Queries.ViewModelsDtos
+﻿namespace TestStore.Vendas.Application.Queries.ViewModelsDtos
 {
     public class CarrinhoPagamentoViewModel
     {
