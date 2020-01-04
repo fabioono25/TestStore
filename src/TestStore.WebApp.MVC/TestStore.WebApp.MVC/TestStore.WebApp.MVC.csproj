@@ -30,11 +30,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <None Include="wwwroot\Images\3m.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

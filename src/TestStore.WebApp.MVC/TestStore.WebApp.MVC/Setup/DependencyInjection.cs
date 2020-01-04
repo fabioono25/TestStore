@@ -9,6 +9,7 @@ using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Vendas.Application.Commands;
 using TestStore.Vendas.Application.Events;
+using TestStore.Vendas.Application.Queries;
 using TestStore.Vendas.Domain;
 using TestStore.Vendas.Infrastructure;
 using TestStore.Vendas.Infrastructure.Repository;
@@ -40,6 +41,7 @@ namespace TestStore.WebApp.MVC.Setup
             // Vendas
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoQueries, PedidoQueries>();
             services.AddScoped<VendasContext>();
 
             services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();

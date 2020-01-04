@@ -7,6 +7,7 @@ using TestStore.Core.Communication;
 using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Vendas.Application.Commands;
+using TestStore.Vendas.Application.Queries;
 
 namespace TestStore.WebApp.MVC.Controllers
 {
@@ -14,18 +15,23 @@ namespace TestStore.WebApp.MVC.Controllers
     {
         private readonly IProdutoAppService _produtoAppService;
         private readonly IMediatorHandler _mediatorHandler;
+        private readonly IPedidoQueries _pedidoQueries;
 
+        //nao tem contexto de carrinho e pedido separado (por conta de ser um exemplo)
         public CarrinhoController(INotificationHandler<DomainNotification> notifications,
                                   IProdutoAppService produtoAppService,
-                                  IMediatorHandler mediatorHandler) : base(notifications, mediatorHandler)
+                                  IMediatorHandler mediatorHandler,
+                                  IPedidoQueries pedidoQueries) : base(notifications, mediatorHandler)
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
+            _pedidoQueries = pedidoQueries;
         }
 
-        public IActionResult Index()
+        [Route("meu-carrinho")]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
         }
 
         [HttpPost]
@@ -52,5 +58,56 @@ namespace TestStore.WebApp.MVC.Controllers
             TempData["Erros"] = ObterMensagensErro();
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
+
+        //[HttpPost]
+        //[Route("remover-item")]
+        //public async Task<IActionResult> RemoverItem(Guid id)
+        //{
+        //    var produto = await _produtoAppService.ObterPorId(id);
+        //    if (produto == null) return BadRequest();
+
+        //    var command = new RemoverItemPedidoCommand(ClienteId, id);
+        //    await _mediatorHandler.EnviarComando(command);
+
+        //    if (OperacaoValida())
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        //}
+
+        //[HttpPost]
+        //[Route("atualizar-item")]
+        //public async Task<IActionResult> AtualizarItem(Guid id, int quantidade)
+        //{
+        //    var produto = await _produtoAppService.ObterPorId(id);
+        //    if (produto == null) return BadRequest();
+
+        //    var command = new AtualizarItemPedidoCommand(ClienteId, id, quantidade);
+        //    await _mediatorHandler.EnviarComando(command);
+
+        //    if (OperacaoValida())
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        //}
+
+        //[HttpPost]
+        //[Route("aplicar-voucher")]
+        //public async Task<IActionResult> AplicarVoucher(string voucherCodigo)
+        //{
+        //    var command = new AplicarVoucherPedidoCommand(ClienteId, voucherCodigo);
+        //    await _mediatorHandler.EnviarComando(command);
+
+        //    if (OperacaoValida())
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        //}
     }
 }
