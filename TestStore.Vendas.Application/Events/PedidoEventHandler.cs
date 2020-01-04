@@ -3,15 +3,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages.IntegrationEvents;
+using TestStore.Vendas.Application.Commands;
 
 namespace TestStore.Vendas.Application.Events
 {
     public class PedidoEventHandler :
         INotificationHandler<PedidoRascunhoIniciadoEvent>,
         INotificationHandler<PedidoItemAdicionadoEvent>,
-        INotificationHandler<PedidoEstoqueRejeitadoEvent>
-        //INotificationHandler<PedidoPagamentoRealizadoEvent>,
-        //INotificationHandler<PedidoPagamentoRecusadoEvent>
+        INotificationHandler<PedidoEstoqueRejeitadoEvent>,
+        INotificationHandler<PedidoPagamentoRealizadoEvent>,
+        INotificationHandler<PedidoPagamentoRecusadoEvent>
     {
 
         private readonly IMediatorHandler _mediatorHandler;
@@ -33,18 +34,18 @@ namespace TestStore.Vendas.Application.Events
 
         public async Task Handle(PedidoEstoqueRejeitadoEvent message, CancellationToken cancellationToken)
         {
-            //cancelar o processameto do pedido  -> retornar erro ao cliente
-            //await _mediatorHandler.EnviarComando(new CancelarProcessamentoPedidoCommand(message.PedidoId, message.ClienteId));
+            //cancelar o processameto do pedido -> retornar erro ao cliente
+            await _mediatorHandler.EnviarComando(new CancelarProcessamentoPedidoCommand(message.PedidoId, message.ClienteId));
         }
 
-        //public async Task Handle(PedidoPagamentoRealizadoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _mediatorHandler.EnviarComando(new FinalizarPedidoCommand(message.PedidoId, message.ClienteId));
-        //}
+        public async Task Handle(PedidoPagamentoRealizadoEvent message, CancellationToken cancellationToken)
+        {
+            await _mediatorHandler.EnviarComando(new FinalizarPedidoCommand(message.PedidoId, message.ClienteId));
+        }
 
-        //public async Task Handle(PedidoPagamentoRecusadoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _mediatorHandler.EnviarComando(new CancelarProcessamentoPedidoEstornarEstoqueCommand(message.PedidoId, message.ClienteId));
-        //}
+        public async Task Handle(PedidoPagamentoRecusadoEvent message, CancellationToken cancellationToken)
+        {
+            await _mediatorHandler.EnviarComando(new CancelarProcessamentoPedidoEstornarEstoqueCommand(message.PedidoId, message.ClienteId));
+        }
     }
 }

@@ -9,7 +9,8 @@ namespace TestStore.Catalogo.Domain.Events
     //classe de manipulacao
     public class ProdutoEventHandler :
         INotificationHandler<ProdutoAbaixoEstoqueEvent>,
-        INotificationHandler<PedidoIniciadoEvent>
+        INotificationHandler<PedidoIniciadoEvent>,
+        INotificationHandler<PedidoProcessamentoCanceladoEvent>
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IEstoqueService _estoqueService;
@@ -45,9 +46,9 @@ namespace TestStore.Catalogo.Domain.Events
             }
         }
 
-        //public async Task Handle(PedidoProcessamentoCanceladoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _estoqueService.ReporListaProdutosPedido(message.ProdutosPedido);
-        //}
+        public async Task Handle(PedidoProcessamentoCanceladoEvent message, CancellationToken cancellationToken)
+        {
+            await _estoqueService.ReporListaProdutosPedido(message.ProdutosPedido);
+        }
     }
 }
