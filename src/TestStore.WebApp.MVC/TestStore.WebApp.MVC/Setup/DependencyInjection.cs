@@ -7,6 +7,7 @@ using TestStore.Catalogo.Domain;
 using TestStore.Catalogo.Domain.Events;
 using TestStore.Core.Communication.Mediator;
 using TestStore.Core.Messages.CommonMessages.Notifications;
+using TestStore.Core.Messages.IntegrationEvents;
 using TestStore.Vendas.Application.Commands;
 using TestStore.Vendas.Application.Events;
 using TestStore.Vendas.Application.Queries;
@@ -37,6 +38,7 @@ namespace TestStore.WebApp.MVC.Setup
             services.AddScoped<CatalogoContext>();
 
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoIniciadoEvent>, ProdutoEventHandler>();
 
             // Vendas
             services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -49,7 +51,7 @@ namespace TestStore.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoCommandHandler>();
             
             services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
-            services.AddScoped<INotificationHandler<PedidoAtualizadoEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoItemAdicionadoEvent>, PedidoEventHandler>();
         }
     }

@@ -1,25 +1,53 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using TestStore.Core.Communication.Mediator;
+using TestStore.Core.Messages.IntegrationEvents;
 
 namespace TestStore.Catalogo.Domain.Events
 {
     //classe de manipulacao
-    public class ProdutoEventHandler : INotificationHandler<ProdutoAbaixoEstoqueEvent>
+    public class ProdutoEventHandler :
+        INotificationHandler<ProdutoAbaixoEstoqueEvent>,
+        INotificationHandler<PedidoIniciadoEvent>
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IEstoqueService _estoqueService;
+        private readonly IMediatorHandler _mediatorHandler;
 
-        public ProdutoEventHandler(IProdutoRepository produtoRepository)
+        public ProdutoEventHandler(IProdutoRepository produtoRepository,
+                                   IEstoqueService estoqueService,
+                                   IMediatorHandler mediatorHandler)
         {
             _produtoRepository = produtoRepository;
+            _estoqueService = estoqueService;
+            _mediatorHandler = mediatorHandler;
         }
 
-        //um handle por evento
-        public async Task Handle(ProdutoAbaixoEstoqueEvent message, CancellationToken cancellationToken)
+        public async Task Handle(ProdutoAbaixoEstoqueEvent mensagem, CancellationToken cancellationToken)
         {
-            var produto = await _produtoRepository.ObterPorId(message.AggregateId);
+            var produto = await _produtoRepository.ObterPorId(mensagem.AggregateId);
 
-            // enviar email para aquisicao de mais produtos
+            // Enviar um email para aquisicao de mais produtos.
         }
+
+        public async Task Handle(PedidoIniciadoEvent message, CancellationToken cancellationToken)
+        {
+            var result = await _estoqueService.DebitarListaProdutosPedido(message.ProdutosPedido);
+
+            if (result)
+            {
+                await _mediatorHandler.PublicarEvento(new PedidoEstoqueConfirmadoEvent(message.PedidoId, message.ClienteId, message.Total, message.ProdutosPedido, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
+            }
+            else
+            {
+                await _mediatorHandler.PublicarEvento(new PedidoEstoqueRejeitadoEvent(message.PedidoId, message.ClienteId));
+            }
+        }
+
+        //public async Task Handle(PedidoProcessamentoCanceladoEvent message, CancellationToken cancellationToken)
+        //{
+        //    await _estoqueService.ReporListaProdutosPedido(message.ProdutosPedido);
+        //}
     }
 }

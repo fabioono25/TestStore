@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Events\PedidoIniciadoEvent.cs.deprecated" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Events\PedidoIniciadoEvent.cs.deprecated" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.1" />
   </ItemGroup>
 

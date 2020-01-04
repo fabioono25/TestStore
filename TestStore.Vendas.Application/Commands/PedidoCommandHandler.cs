@@ -1,10 +1,14 @@
 ﻿using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TestStore.Core.Communication.Mediator;
+using TestStore.Core.DomainObjects.Dto;
+using TestStore.Core.Extensions;
 using TestStore.Core.Messages;
 using TestStore.Core.Messages.CommonMessages.Notifications;
+using TestStore.Core.Messages.IntegrationEvents;
 using TestStore.Vendas.Application.Events;
 using TestStore.Vendas.Domain;
 
@@ -62,18 +66,6 @@ namespace TestStore.Vendas.Application.Commands
 
             pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
             return await _pedidoRepository.UnitOfWork.Commit();
-        }
-
-        private bool ValidarComando(Command message)
-        {
-            if (message.EhValido()) return true;
-
-            foreach (var error in message.ValidationResult.Errors)
-            {
-                _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
-            }
-
-            return false;
         }
 
         public async Task<bool> Handle(AtualizarItemPedidoCommand message, CancellationToken cancellationToken)
@@ -179,5 +171,36 @@ namespace TestStore.Vendas.Application.Commands
 
             return await _pedidoRepository.UnitOfWork.Commit();
         }
+
+        public async Task<bool> Handle(IniciarPedidoCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(message)) return false;
+
+            var pedido = await _pedidoRepository.ObterPedidoRascunhoPorClienteId(message.ClienteId);
+            pedido.IniciarPedido();
+
+            var itensList = new List<Item>();
+            pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
+            var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
+
+            //comecarei a integracao: retiro produtos do estoque, depois realizo o pagamento
+            pedido.AdicionarEvento(new PedidoIniciadoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido, pedido.ValorTotal, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
+
+            _pedidoRepository.Atualizar(pedido);
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        private bool ValidarComando(Command message)
+        {
+            if (message.EhValido()) return true;
+
+            foreach (var error in message.ValidationResult.Errors)
+            {
+                _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
+            }
+
+            return false;
+        }
+
     }
 }
