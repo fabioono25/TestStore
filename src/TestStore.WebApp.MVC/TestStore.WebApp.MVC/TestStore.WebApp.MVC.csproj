@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\..\TestStore.Catalogo.Data\TestStore.Catalogo.Data.csproj" />
     <ProjectReference Include="..\..\..\TestStore.Vendas.Application\TestStore.Vendas.Application.csproj" />
     <ProjectReference Include="..\..\..\TestStore.Vendas.Infrastructure\TestStore.Vendas.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\EventSourcing\EventSourcing.csproj" />
     <ProjectReference Include="..\..\TestStore.Catalogo.Application\TestStore.Catalogo.Application.csproj" />
     <ProjectReference Include="..\..\TestStore.Catalogo.Domain\TestStore.Catalogo.Domain.csproj" />
     <ProjectReference Include="..\..\TestStore.Core\TestStore.Core.csproj" />

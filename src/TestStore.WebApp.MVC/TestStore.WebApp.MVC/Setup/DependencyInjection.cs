@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EventSourcing;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using TestStore.Catalogo.Application.Services;
 using TestStore.Catalogo.Data;
@@ -35,6 +36,10 @@ namespace TestStore.WebApp.MVC.Setup
 
             // Notifications
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+
+            // Event Sourcing
+            services.AddSingleton<IEventStoreService, EventStoreService>();
+            //services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
 
             // Catalogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
