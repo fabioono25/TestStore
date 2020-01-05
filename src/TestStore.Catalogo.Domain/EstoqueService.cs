@@ -93,8 +93,9 @@ namespace TestStore.Catalogo.Domain
             var produto = await _produtoRepository.ObterPorId(produtoId);
 
             if (produto == null) return false;
+            //pode ser lancado um evento aqui, para identificar que o mesmo foi reposito ao estoque
             produto.ReporEstoque(quantidade);
-
+            
             _produtoRepository.Atualizar(produto);
 
             return true;
@@ -116,7 +117,8 @@ namespace TestStore.Catalogo.Domain
 
             if (produto.QuantidadeEstoque < 10)
             {
-                await _mediatorHandler.PublicarEvento(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
+                //await _mediatorHandler.PublicarEvento(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
+                await _mediatorHandler.PublicarDomainEvent(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
             }
 
             _produtoRepository.Atualizar(produto);

@@ -7,6 +7,7 @@ using TestStore.Catalogo.Data.Repository;
 using TestStore.Catalogo.Domain;
 using TestStore.Catalogo.Domain.Events;
 using TestStore.Core.Communication.Mediator;
+using TestStore.Core.Data.EventSourcing;
 using TestStore.Core.Messages.CommonMessages.Notifications;
 using TestStore.Core.Messages.IntegrationEvents;
 using TestStore.Pagamentos.AntiCorruption;
@@ -39,7 +40,7 @@ namespace TestStore.WebApp.MVC.Setup
 
             // Event Sourcing
             services.AddSingleton<IEventStoreService, EventStoreService>();
-            //services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
+            services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
 
             // Catalogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

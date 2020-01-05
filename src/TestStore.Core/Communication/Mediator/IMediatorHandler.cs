@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using TestStore.Core.DomainObjects;
 using TestStore.Core.Messages;
 using TestStore.Core.Messages.CommonMessages.Notifications;
 
@@ -15,5 +16,7 @@ namespace TestStore.Core.Communication.Mediator
 
         //tratar separadamente como uma notificacao
         Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification;
+
+        Task PublicarDomainEvent<T>(T notificacao) where T : DomainEvent;
     }
 }
